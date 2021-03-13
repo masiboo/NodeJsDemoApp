@@ -3,7 +3,7 @@ import routes from './routes/feedbackRoutes';
 import {Feedback} from './model/feedback';
 
 class App {
-  public express;
+  public express : any;
   public feedback: Feedback = new Feedback();
   private port = process.env.PORT || 4000;
   

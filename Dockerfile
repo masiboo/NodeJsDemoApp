@@ -1,6 +1,6 @@
-FROM node:14
+FROM node:latest
 
-# Create app directory
+# Create app directory 
 WORKDIR /usr/src/app
 
 #ENV PORT 4000
