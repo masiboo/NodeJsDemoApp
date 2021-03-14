@@ -1,17 +1,18 @@
 import FeedbackController from '../controller/feedbackController';
 
+
 const routes = (app) => {
     app.route('/')
-    .get(FeedbackController.homePage);
+    .get((req, res) => FeedbackController.homePage(req, res));
 
-    app.route('/questionOne')
-    .post(FeedbackController.addQuestionOne);
+    app.route('/addFeedback')
+    .post((req, res) => FeedbackController.addFeedback(req, res));
     
-    app.route('/questionTwo')
-    .post(FeedbackController.addQuestionTwo);
+    // app.route('/questionTwo')
+    // .post(FeedbackController.addQuestionTwo);
 
-    app.route('/questionThree')
-    .post(FeedbackController.questionThreeRate);
+    // app.route('/questionThree')
+    // .post(FeedbackController.questionThreeRate);
  
     app.route('/getFeedback')
     .get(FeedbackController.getTest);
