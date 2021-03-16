@@ -4,11 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const cors = require("cors");
 const feedbackRoutes_1 = __importDefault(require("./routes/feedbackRoutes"));
-const feedback_1 = require("./model/feedback");
+const Survey_1 = require("./model/Survey");
 class App {
     constructor() {
-        this.feedback = new feedback_1.Feedback();
+        this.survey = new Survey_1.Survey();
         this.port = process.env.PORT || 4000;
         this.express = express_1.default();
         this.config();
@@ -17,6 +18,7 @@ class App {
     config() {
         this.express.use(express_1.default.urlencoded({ extended: true }));
         this.express.use(express_1.default.json());
+        this.express.use(cors());
         feedbackRoutes_1.default(this.express);
     }
     listen() {

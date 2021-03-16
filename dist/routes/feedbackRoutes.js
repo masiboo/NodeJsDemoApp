@@ -9,12 +9,8 @@ const routes = (app) => {
         .get((req, res) => feedbackController_1.default.homePage(req, res));
     app.route('/addFeedback')
         .post((req, res) => feedbackController_1.default.addFeedback(req, res));
-    // app.route('/questionTwo')
-    // .post(FeedbackController.addQuestionTwo);
-    // app.route('/questionThree')
-    // .post(FeedbackController.questionThreeRate);
     app.route('/getFeedback')
-        .get(feedbackController_1.default.getTest);
+        .get(feedbackController_1.default.getFeedback);
 };
 exports.default = routes;
 //# sourceMappingURL=feedbackRoutes.js.map

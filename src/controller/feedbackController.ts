@@ -8,48 +8,41 @@ class FeedbackController {
 
   
   public addFeedback(req, res){
-    console.log("addQuestionOne " + req.body.questionOneRate);
-    if(req.body.questionOneRate != null ){
-       return this.setQuestionOneRate(req, res)
-    }else if(req.body.questionTwoRate != null){
-       return this.setQuestionTwoRate(req, res);
-    }else if(req.body.questionThreeRate != null){
-      return this.setQuestionThreeRate(req, res);
+    if(req.body.questionOneAnswer != null ){
+       return this.setQuestionOneAnswer(req, res)
+    }else if(req.body.questionTwoAnswer != null){
+       return this.setQuestionTwoAnswer(req, res);
+    }else if(req.body.questionThreeAnswer != null){
+      return this.setQuestionThreeAnswer(req, res);
     }
 
   }
 
-  private setQuestionOneRate(req, res): String{
-    App.feedback.questionOneRate = req.body.questionOneRate;
-    if(req.body.questionOneRate <= 6){
-      return  res.send(`Why did you give ${req.body.questionOneRate}? What can we improve to get a higher rating`);
+  private setQuestionOneAnswer(req, res): String{
+    App.survey.question1 = 'How likely are you going to recommend our service to a friend or colleague?';
+    App.survey.answer1 = req.body.questionOneAnswer;
+    if(req.body.questionOneAnswer <= 6){
+      App.survey.question2 = `It is considered a lower rating. Why did you give ${req.body.questionOneAnswer}?`;
+      return  res.send(App.survey.question2);
     }else {
-      return  res.send(`Why did you give ${req.body.questionOneRate}? Please tell us what have we done good and what can be done better?` );
+      App.survey.question2 = `It is considered a high rating. Why did you give ${req.body.questionOneAnswer}?`; 
+      return  res.send(App.survey.question2);
     } 
   }
 
-  private setQuestionTwoRate(req, res): String{
-    App.feedback.questionTwoRate = req.body.questionTwoRate;
-    App.feedback.questionTwoRate = req.body.questionTwoRate;
+  private setQuestionTwoAnswer(req, res): String{
+    App.survey.answer2 = req.body.questionTwoAnswer;
     return res.sendStatus(200);  
   }
 
-  public addQuestionTwo(req, res){
-    console.log("addQuestionTwo " + req.body.questionTwoRate);
-    App.feedback.questionTwoRate = req.body.questionTwoRate;
+  public setQuestionThreeAnswer(req, res){
+    App.survey.question3 = 'How likely will you continue using our service?';
+    App.survey.answer3 = req.body.questionThreeAnswer;
     return res.sendStatus(200)
   };
 
-  public setQuestionThreeRate(req, res){
-    App.feedback.questionThreeRate = req.body.questionThreeRate;
-    return res.sendStatus(200)
-  };
-
-  public getTest(req, res){
-    console.log("feedback.addQuestionOne " + App.feedback.questionOneRate);
-    console.log("feedback.addQuestionTwo " + App.feedback.questionTwoRate); 
-    console.log("feedback.questionThreeRate " + App.feedback.questionThreeRate);
-    return res.json(App.feedback);
+  public getFeedback(req, res){
+    return res.json(App.survey);
   }
 
 }

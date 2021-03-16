@@ -1,10 +1,11 @@
 import express from 'express';
+import cors = require('cors');
 import routes from './routes/feedbackRoutes';
-import {Feedback} from './model/feedback';
+import { Survey } from './model/Survey';
 
 class App {
   public express : any;
-  public feedback: Feedback = new Feedback();
+  public survey: Survey = new Survey();
   private port = process.env.PORT || 4000;
   
   constructor(){
@@ -16,6 +17,7 @@ class App {
    private config(){
     this.express.use(express.urlencoded({ extended: true }));
     this.express.use(express.json());
+    this.express.use(cors());
     routes(this.express);
   }
 
